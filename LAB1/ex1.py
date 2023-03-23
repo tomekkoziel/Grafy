@@ -92,7 +92,7 @@ def task1():
     G = nx.Graph()
 
     input = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
-
+    
 
     match sys.argv[2]:
         case 'am': 
