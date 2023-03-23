@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 def adj_matrix_to_adj_list(matrix):
     adjlist = []
@@ -75,44 +76,60 @@ def get_edges_from_adjmatrix(adjmatrix):
 
     return edges
 
-def check_input(input):
+# def check_input(input):
 
-    sum = 0;
+#     sum = 0;
 
-    for i in range(len(input)):
-        sum += len(input[i])
+#     for i in range(len(input)):
+#         sum += len(input[i])
 
-    if sum == len(input)*len(input):
-        return 'am'
-    # elif 
-    #TODO
+#     if sum == len(input)*len(input):
+#         return 'am'
+#     # elif 
+#     #TODO
 
 def task1():
     G = nx.Graph()
-    input = np.loadtxt('input/adjmatrix.txt', delimiter = ' ', dtype = 'int')
+
+    input = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
 
 
-    adjmatrix = input
-    print_adjacency_matrix(adjmatrix)
+    match sys.argv[2]:
+        case 'am': 
+            # adjacency matrix
+            adjmatrix = input
+            print_adjacency_matrix(adjmatrix)
 
-    adjlist = adj_matrix_to_adj_list(adjmatrix)
-    print_adjacency_list(adjlist)
-    print_incidence_matrix(adj_matrix_to_incidence_matrix(adjmatrix))
-    
+            adjlist = adj_matrix_to_adj_list(adjmatrix)
+            print_adjacency_list(adjlist)
+            print_incidence_matrix(adj_matrix_to_incidence_matrix(adjmatrix))
+            
 
-    # add all nodes to the graph
-    nodes = get_nodes_from_adjmatrix(adjmatrix)
-    G.add_nodes_from(nodes)
+            # add all nodes to the graph
+            nodes = get_nodes_from_adjmatrix(adjmatrix)
+            G.add_nodes_from(nodes)
 
-    edges = get_edges_from_adjmatrix(adjmatrix)
-    G.add_edges_from(edges)
-    print(edges)
+            edges = get_edges_from_adjmatrix(adjmatrix)
+            G.add_edges_from(edges)
+            print(edges)
 
-    
-    nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
+            nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
             node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
-    # plt.show()
+            # plt.show()
 
+        case 'al':
+            # adjacency list
+            print()
+        case 'im':
+            # incidence matrix
+            print()
+        case _:
+            print("Please specify input type")
+
+    #####################
+    # input musi byc typu: python ex1.py input/adjmatrix.txt "am"
+    #####################
+    
 
 task1()
 
