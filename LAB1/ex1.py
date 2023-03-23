@@ -28,7 +28,7 @@ def task1():
     # printing the adjacency list
     print("Adjacency list:")
     for i in range(len(adjlist)):
-        print(str(adjlist[i][0]) + ": ", end = "")
+        print(str(adjlist[i][0] + 1) + ": ", end = "")
         print(*adjlist[i][1:], sep = ", ")
 
     # add all the edges of the graph
@@ -40,7 +40,8 @@ def task1():
 
 
     G.add_edges_from(edges)
-    nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = 'orange')
+    nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
+            node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
     plt.show()
 
 
