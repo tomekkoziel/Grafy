@@ -37,11 +37,13 @@ def get_edges_from_adjmatrix(adjmatrix):
                 e = (i + 1, j + 1)
                 edges.append(e)
 
-    
+    return edges
+
 
 def task1():
     G = nx.Graph()
     input = np.loadtxt('input/adjmatrix.txt', delimiter = ' ', dtype = 'int')
+
 
     adjmatrix = input
 
