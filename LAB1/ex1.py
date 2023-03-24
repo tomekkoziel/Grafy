@@ -115,7 +115,7 @@ def task1():
 
             nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
             node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
-            # plt.show()
+            plt.show()
 
         case 'al':
             # adjacency list
