@@ -37,7 +37,7 @@ def adj_list_to_adj_matrix(list):
 
     return adjmatrix
                 
-
+# print functions
 def print_adjacency_list(adjlist):
     print("\nAdjacency list:")
     for i in range(len(adjlist)):
@@ -90,12 +90,10 @@ def get_edges_from_adjmatrix(adjmatrix):
 
 def task1():
     G = nx.Graph()
-
     input = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
-    
 
     match sys.argv[2]:
-        case 'am': 
+        case 'am':
             # adjacency matrix
             adjmatrix = input
             print_adjacency_matrix(adjmatrix)
@@ -111,6 +109,7 @@ def task1():
 
             edges = get_edges_from_adjmatrix(adjmatrix)
             G.add_edges_from(edges)
+            print("All edges:")
             print(edges)
 
             nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
@@ -119,7 +118,26 @@ def task1():
 
         case 'al':
             # adjacency list
-            print()
+            adjlist = input
+            print_adjacency_list(adjlist)
+
+            adjmatrix = adj_list_to_adj_matrix(adjlist)
+            print_adjacency_matrix(adjmatrix)
+
+            incmatrix = adj_matrix_to_incidence_matrix(adjmatrix)
+            print_incidence_matrix(incmatrix)
+
+            nodes = get_nodes_from_adjmatrix(adjmatrix)
+            G.add_nodes_from(nodes)
+
+            edges = get_edges_from_adjmatrix(adjmatrix)
+            G.add_edges_from(edges)
+            print("All edges:")
+            print(edges)
+
+            nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
+            node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
+            plt.show()
         case 'im':
             # incidence matrix
             print()
