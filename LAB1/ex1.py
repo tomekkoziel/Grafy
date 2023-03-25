@@ -36,6 +36,14 @@ def adj_list_to_adj_matrix(list):
             adjmatrix[i][j - 1] = 1
 
     return adjmatrix
+
+def incidence_matrix_to_adj_matrix(incmatrix):
+    num_vertices = len(incmatrix)
+    num_edges = len(incmatrix[0])
+    adj_matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    
+
                 
 # print functions
 def print_adjacency_list(adjlist):
@@ -140,6 +148,10 @@ def task1():
             plt.show()
         case 'im':
             # incidence matrix
+            incmatrix = input
+            print_incidence_matrix(incmatrix)
+
+            
             print()
         case _:
             print("Please specify input type")
