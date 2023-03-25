@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+from collections import defaultdict
 import sys
 
 def adj_matrix_to_adj_list(matrix):
@@ -42,7 +43,20 @@ def incidence_matrix_to_adj_matrix(incmatrix):
     num_edges = len(incmatrix[0])
     adj_matrix = [[0] * num_vertices for _ in range(num_vertices)]
 
-    
+
+def incidence_matrix_to_adj_list(incmatrix):
+    adjacency_list = defaultdict(list)
+    def add_edge(x, y):
+        adjacency_list[x].append(y)
+        adjacency_list[y].append(x)
+
+    for vertices in incmatrix:
+        pairs = []
+        for index, v in enumerate(vertices):
+            if v:
+                pairs.append(index)
+        add_edge(*pairs)
+    return dict(adjacency_list)
 
                 
 # print functions
@@ -109,7 +123,6 @@ def task1():
             adjlist = adj_matrix_to_adj_list(adjmatrix)
             print_adjacency_list(adjlist)
             print_incidence_matrix(adj_matrix_to_incidence_matrix(adjmatrix))
-            
 
             # add all nodes to the graph
             nodes = get_nodes_from_adjmatrix(adjmatrix)
@@ -125,7 +138,7 @@ def task1():
             plt.show()
 
         case 'al':
-            # adjacency list
+            # adjacency list ### non operational ###
             adjlist = input
             print_adjacency_list(adjlist)
 
@@ -147,12 +160,10 @@ def task1():
             node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
             plt.show()
         case 'im':
-            # incidence matrix
+            # incidence matrix ### non operational ###
             incmatrix = input
             print_incidence_matrix(incmatrix)
-
-            
-            print()
+            print(incidence_matrix_to_adj_list(incmatrix))
         case _:
             print("Please specify input type")
 
