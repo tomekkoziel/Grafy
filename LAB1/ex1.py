@@ -112,12 +112,21 @@ def get_edges_from_adjmatrix(adjmatrix):
 
 def task1():
     G = nx.Graph()
-    input = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
+    input = []
+    with open(sys.argv[1]) as f:
+        for lines in f.readlines():
+            lines = lines.replace("\n","")
+            lines = lines.replace("'","")
+            input.append([lines])
+
+    arr = np.array(input)
+
+    print(arr)
 
     match sys.argv[2]:
         case 'am':
             # adjacency matrix
-            adjmatrix = input
+            adjmatrix = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
             print_adjacency_matrix(adjmatrix)
 
             adjlist = adj_matrix_to_adj_list(adjmatrix)
@@ -139,6 +148,9 @@ def task1():
 
         case 'al':
             # adjacency list ### non operational ###
+
+
+
             adjlist = input
             print_adjacency_list(adjlist)
 
@@ -161,7 +173,7 @@ def task1():
             plt.show()
         case 'im':
             # incidence matrix ### non operational ###
-            incmatrix = input
+            incmatrix = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
             print_incidence_matrix(incmatrix)
             print(incidence_matrix_to_adj_list(incmatrix))
         case _:
