@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 import sys
+from ex2 import drawCircularGraph
 
 def adj_matrix_to_adj_list(matrix):
     adjlist = []
@@ -168,9 +169,8 @@ def task1():
             print("All edges:")
             print(edges)
 
-            nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
-            node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
-            plt.show()
+            drawCircularGraph(G)
+            
         case 'im':
             # incidence matrix ### non operational ###
             incmatrix = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
