@@ -15,7 +15,7 @@ def drawCircularGraph(G):
     # Słownik przechowywujący posycje kolejnych wierzchołków
     positions = {}
     
-    for i in range(n):
+    for i in range(n+1):
         positions.update(
             {(i ): np.array([x_0 + r * np.cos(i * alpha), y_0 + r * np.sin(i * alpha)])})
 

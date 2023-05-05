@@ -9,7 +9,7 @@ def adj_matrix_to_adj_list(matrix):
     adjlist = []
 
     for i in range(len(matrix)):
-        adjlist.append([i])
+        adjlist.append([i + 1])
         for j in range(len(matrix[i])):
             if matrix[i][j] == 1:
                 adjlist[i].append(j + 1)
@@ -64,7 +64,7 @@ def incidence_matrix_to_adj_list(incmatrix):
 def print_adjacency_list(adjlist):
     print("\nAdjacency list:")
     for i in range(len(adjlist)):
-        print(str(adjlist[i][0] + 1) + ": ", end = "")
+        print(str(adjlist[i][0]) + ": ", end = "")
         print(*adjlist[i][1:], sep = ", ")
     print()
 
@@ -113,16 +113,6 @@ def get_edges_from_adjmatrix(adjmatrix):
 
 def task1():
     G = nx.Graph()
-    input = []
-    with open(sys.argv[1]) as f:
-        for lines in f.readlines():
-            lines = lines.replace("\n","")
-            lines = lines.replace("'","")
-            input.append([lines])
-
-    arr = np.array(input)
-
-    print(arr)
 
     match sys.argv[2]:
         case 'am':
@@ -143,16 +133,21 @@ def task1():
             print("All edges:")
             print(edges)
 
-            nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
-            node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
-            plt.show()
+            drawCircularGraph(G)
 
         case 'al':
             # adjacency list ### non operational ###
 
+            with open(sys.argv[1], 'r') as f:
+                lines = f.readlines()
+                
+            adjlist = []
+            
+            for line in lines:
+                nodes = list(map(int, line.split()))
+                adjlist.append(nodes)
+            # print(adjlist)
 
-
-            adjlist = input
             print_adjacency_list(adjlist)
 
             adjmatrix = adj_list_to_adj_matrix(adjlist)
@@ -166,6 +161,7 @@ def task1():
 
             edges = get_edges_from_adjmatrix(adjmatrix)
             G.add_edges_from(edges)
+            
             print("All edges:")
             print(edges)
 
