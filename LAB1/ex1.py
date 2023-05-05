@@ -170,8 +170,27 @@ def task1():
         case 'im':
             # incidence matrix ### non operational ###
             incmatrix = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
+
             print_incidence_matrix(incmatrix)
             print(incidence_matrix_to_adj_list(incmatrix))
+            
+            # adjlist = incidence_matrix_to_adj_list(incmatrix)
+            # print_adjacency_list(adjlist)
+            
+            # adjmatrix = adj_list_to_adj_matrix(adjlist)
+            # print_adjacency_matrix(adjmatrix)
+            
+            # nodes = get_nodes_from_adjmatrix(adjmatrix)
+            # G.add_nodes_from(nodes)
+
+            # edges = get_edges_from_adjmatrix(adjmatrix)
+            # G.add_edges_from(edges)
+            
+            # print("All edges:")
+            # print(edges)
+
+            # drawCircularGraph(G)
+            
         case _:
             print("Please specify input type")
 
