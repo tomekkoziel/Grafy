@@ -77,5 +77,6 @@ def task3(n, l = 0, p = 0):
     draw_graph_from_adjmatrix(adjmatrix)
     plt.show()
 
-task3(n = 5, p = 0.1)
-task3(n = 5, l = 9)
+if __name__ == '__main__':
+    task3(n = 5, p = 0.1)   
+    task3(n = 5, l = 9) 

@@ -12,7 +12,7 @@ def drawCircularGraph(G):
     # Pozycja startowa i promień
     x_0, y_0, r = 0, 0, 20
     
-    # Słownik przechowywujący posycje kolejnych wierzchołków
+    # Słownik przechowywujący pozycje kolejnych wierzchołków
     positions = {}
     
     for i in range(n+1):

@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 import sys
-from ex2 import drawCircularGraph
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from LAB1.ex2 import drawCircularGraph
 
 def adj_matrix_to_adj_list(matrix):
     adjlist = []
@@ -155,7 +157,7 @@ def task1():
             drawCircularGraph(G)
 
         case 'al':
-            # adjacency list ### operational ###
+            # adjacency list
 
             with open(sys.argv[1], 'r') as f:
                 lines = f.readlines()
@@ -187,7 +189,7 @@ def task1():
             drawCircularGraph(G)
             
         case 'im':
-            # incidence matrix ### non operational ###
+            # incidence matrix
             incmatrix = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
 
             print_incidence_matrix(incmatrix)
@@ -216,6 +218,6 @@ def task1():
     # input musi byc typu: python ex1.py input/adjmatrix.txt "am"
     #####################
     
-
-task1()
+if __name__ == '__main__':
+    task1()
 
