@@ -120,18 +120,6 @@ def get_edges_from_incmatrix(incmatrix):
         edges.append(e)
     return edges
 
-# def check_input(input):
-
-#     sum = 0;
-
-#     for i in range(len(input)):
-#         sum += len(input[i])
-
-#     if sum == len(input)*len(input):
-#         return 'am'
-#     # elif 
-#     #TODO
-
 def task1():
     G = nx.Graph()
 

@@ -5,35 +5,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 
-from LAB1.ex1 import adj_list_to_adj_matrix, get_nodes_from_adjmatrix, get_edges_from_adjmatrix, drawCircularGraph
-
-
-def read_from_file(path):
-    # Konwersja pliku z adjacency list do nx.Graph()
-    
-    G = nx.Graph()
-    
-    with open(path, 'r') as f:
-        lines = f.readlines()
-                
-    adjlist = []
-    
-    for line in lines:
-        nodes = list(map(int, line.split()))
-        adjlist.append(nodes)
-
-    adjmatrix = adj_list_to_adj_matrix(adjlist)
-    nodes = get_nodes_from_adjmatrix(adjmatrix)
-    G.add_nodes_from(nodes)
-    edges = get_edges_from_adjmatrix(adjmatrix)
-    G.add_edges_from(edges)
-    
-    # Testowanie
-    # print("All edges:")
-    # print(edges)
-    # drawCircularGraph(G)
-    
-    return G
+from utility import read_from_file
 
 def is_hamilton(G):
     n = G.number_of_nodes()
