@@ -118,7 +118,7 @@ def components(nodes, edges):
             comp[node - 1] = nr
             components_R(nr, node, comp, edges)
     
-    # print(comp)
+    print(comp)
     return comp
 
 def components_R(nr, node, comp, edges):
@@ -191,8 +191,8 @@ def task3(path):
     plt.show()
 
 
-task1("./data_ex1.txt")
-task2("./data_ex2.txt")
+# task1("./data_ex1.txt")
+# task2("./data_ex2.txt")
 task3("./data_ex3.txt")
 
 
