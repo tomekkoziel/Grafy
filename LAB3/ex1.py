@@ -10,7 +10,7 @@ def is_connected(adj_matrix):
     n = len(adj_matrix)
     visited = [False] * n
     
-    # Funkcja pomocnicza DFS
+    # Funkcja pomocnicza Przeszukiwanie w głąb
     def dfs(v):
         visited[v] = True
         for i in range(n):
