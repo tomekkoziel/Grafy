@@ -3,12 +3,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from LAB1.ex2 import drawCircularGraph
 
 def adj_matrix_to_adj_list(matrix):
     adjlist = []
 
     for i in range(len(matrix)):
-        adjlist.append([i])
+        adjlist.append([i + 1])
         for j in range(len(matrix[i])):
             if matrix[i][j] == 1:
                 adjlist[i].append(j + 1)
@@ -38,32 +41,32 @@ def adj_list_to_adj_matrix(list):
 
     return adjmatrix
 
-def incidence_matrix_to_adj_matrix(incmatrix):
-    num_vertices = len(incmatrix)
-    num_edges = len(incmatrix[0])
-    adj_matrix = [[0] * num_vertices for _ in range(num_vertices)]
-
-
 def incidence_matrix_to_adj_list(incmatrix):
-    adjacency_list = defaultdict(list)
-    def add_edge(x, y):
-        adjacency_list[x].append(y)
-        adjacency_list[y].append(x)
 
-    for vertices in incmatrix:
-        pairs = []
-        for index, v in enumerate(vertices):
-            if v:
-                pairs.append(index)
-        add_edge(*pairs)
-    return dict(adjacency_list)
+    vertices_number = len(incmatrix)
+    edges_number = len(incmatrix[0])
+
+    edges = get_edges_from_incmatrix(incmatrix)
+
+    adjlist = [ [i + 1] for i in range(vertices_number) ]
+    
+
+    for i in range(vertices_number):
+        for pair in edges:
+            if pair[0] == i + 1:
+                if pair[1] != -3:
+                    adjlist[i].append(pair[1])
+                    adjlist[pair[1] - 1].append(i + 1)
+
+    return adjlist
+
 
                 
 # print functions
 def print_adjacency_list(adjlist):
     print("\nAdjacency list:")
     for i in range(len(adjlist)):
-        print(str(adjlist[i][0] + 1) + ": ", end = "")
+        print(str(adjlist[i][0]) + ": ", end = "")
         print(*adjlist[i][1:], sep = ", ")
     print()
 
@@ -98,30 +101,27 @@ def get_edges_from_adjmatrix(adjmatrix):
 
     return edges
 
-# def check_input(input):
+def get_edges_from_incmatrix(incmatrix):
+    edges = []
 
-#     sum = 0;
-
-#     for i in range(len(input)):
-#         sum += len(input[i])
-
-#     if sum == len(input)*len(input):
-#         return 'am'
-#     # elif 
-#     #TODO
+    vertices_number = len(incmatrix)
+    edges_number = len(incmatrix[0])
+    
+    for i in range(edges_number):
+        v1 = -4
+        v2 = -4
+        for j in range(vertices_number):
+            if incmatrix[j][i] == 1:
+                if v1 == -4:
+                    v1 = j
+                else:
+                    v2 = j
+        e = (v1 + 1, v2 + 1)
+        edges.append(e)
+    return edges
 
 def task1():
     G = nx.Graph()
-    input = []
-    with open(sys.argv[1]) as f:
-        for lines in f.readlines():
-            lines = lines.replace("\n","")
-            lines = lines.replace("'","")
-            input.append([lines])
-
-    arr = np.array(input)
-
-    print(arr)
 
     match sys.argv[2]:
         case 'am':
@@ -142,16 +142,21 @@ def task1():
             print("All edges:")
             print(edges)
 
-            nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
-            node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
-            plt.show()
+            drawCircularGraph(G)
 
         case 'al':
-            # adjacency list ### non operational ###
+            # adjacency list
 
+            with open(sys.argv[1], 'r') as f:
+                lines = f.readlines()
+                
+            adjlist = []
+            
+            for line in lines:
+                nodes = list(map(int, line.split()))
+                adjlist.append(nodes)
+            # print(adjlist)
 
-
-            adjlist = input
             print_adjacency_list(adjlist)
 
             adjmatrix = adj_list_to_adj_matrix(adjlist)
@@ -165,17 +170,35 @@ def task1():
 
             edges = get_edges_from_adjmatrix(adjmatrix)
             G.add_edges_from(edges)
+            
             print("All edges:")
             print(edges)
 
-            nx.draw(G, pos = nx.circular_layout(G), with_labels=True, node_color = '#ffa059',
-            node_size = [1000] * len(adjmatrix), edgecolors = '#ff6d01')
-            plt.show()
+            drawCircularGraph(G)
+            
         case 'im':
-            # incidence matrix ### non operational ###
+            # incidence matrix
             incmatrix = np.loadtxt(sys.argv[1], delimiter = ' ', dtype = 'int')
+
             print_incidence_matrix(incmatrix)
-            print(incidence_matrix_to_adj_list(incmatrix))
+
+            adjlist = incidence_matrix_to_adj_list(incmatrix)
+            print_adjacency_list(adjlist)
+            
+            adjmatrix = adj_list_to_adj_matrix(adjlist)
+            print_adjacency_matrix(adjmatrix)
+            
+            nodes = get_nodes_from_adjmatrix(adjmatrix)
+            G.add_nodes_from(nodes)
+
+            edges = get_edges_from_adjmatrix(adjmatrix)
+            G.add_edges_from(edges)
+            
+            print("All edges:")
+            print(edges)
+
+            drawCircularGraph(G)
+            
         case _:
             print("Please specify input type")
 
@@ -183,6 +206,6 @@ def task1():
     # input musi byc typu: python ex1.py input/adjmatrix.txt "am"
     #####################
     
-
-task1()
+if __name__ == '__main__':
+    task1()
 

@@ -135,6 +135,7 @@ def components_R(nr, node, comp, edges):
             comp[neighbour - 1] = nr
             components_R(nr, neighbour, comp, edges)
 
+    
 def task1(path):
     matrix = np.loadtxt(path, delimiter=" ", dtype=int)
     if(check_if_graphical(matrix)):
@@ -190,10 +191,10 @@ def task3(path):
         print("Ciąg nie jest graficzny")
     plt.show()
 
-
-# task1("./data_ex1.txt")
-# task2("./data_ex2.txt")
-task3("./data_ex3.txt")
+if __name__ == '__main__':
+    # task1("./data_ex1.txt")
+    # task2("./data_ex2.txt")
+    task3("./data_ex3.txt")
 
 
 
