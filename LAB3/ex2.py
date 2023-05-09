@@ -51,9 +51,11 @@ def print_shortest_paths(ds, ps, s):
     for i in range(len(ds)):
         path = [i]
         j = i
-        while j != -1:
+        while j != -1 and j != 0:
             j = ps[j]
             path.insert(0, j)
+            
+        path = [node + 1 for node in path]
         print(f'd({i+1}) = {ds[i]} ==> {path}')
         
 if __name__ == '__main__':
@@ -62,9 +64,10 @@ if __name__ == '__main__':
     draw_weighted_graph(G_temp)
     
     G = nx.to_numpy_array(G_temp)
-    print(G)
     ds, ps = dijkstra(G, G, 1)
-    print(ds)
-    print(ps)
+    
+    # print(G)
+    # print(ds)
+    # print(ps)
     
     print_shortest_paths(ds, ps, 1)
