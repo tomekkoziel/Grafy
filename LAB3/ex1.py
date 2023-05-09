@@ -50,7 +50,7 @@ def draw_weighted_graph(G):
     plt.show()
     
     # Testowanie
-    plt.savefig('test.png')
+    # plt.savefig('test.png')
         
 if __name__ == '__main__':
     # Wygenerowany graf
