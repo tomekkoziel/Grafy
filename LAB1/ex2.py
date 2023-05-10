@@ -24,4 +24,4 @@ def drawCircularGraph(G):
     plt.show()
     
     # Testowanie
-    # plt.savefig("test.png")
+    # plt.savefig("graph.png")
