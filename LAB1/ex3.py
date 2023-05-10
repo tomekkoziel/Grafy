@@ -36,8 +36,8 @@ def make_rand_graph_propability(n, p):
     adjmatrix = np.zeros((n,n),dtype=int)
     # Losowanie krawędzi grafu
     for i in range(n):
-        for j in range(i+1,n):
-            adjmatrix[i][j] = random.choices([0,1],weights=[1-p,p],k=1)[0]
+        for j in range(i+1, n):
+            adjmatrix[i][j] = random.choices([0, 1],weights=[1-p, p], k=1)[0]
             adjmatrix[j][i] = adjmatrix[i][j]
     # print(adjmatrix)
     return adjmatrix

@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 
-def drawCircularGraph(G):
+def draw_circular_graph(G):
     # Liczba wierzchołków
     n = G.number_of_nodes()
     
@@ -24,4 +24,4 @@ def drawCircularGraph(G):
     plt.show()
     
     # Testowanie
-    # plt.savefig("test.png")
+    # plt.savefig("graph.png")

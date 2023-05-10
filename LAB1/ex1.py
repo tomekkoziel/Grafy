@@ -5,7 +5,7 @@ from collections import defaultdict
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from LAB1.ex2 import drawCircularGraph
+from LAB1.ex2 import draw_circular_graph
 
 def adj_matrix_to_adj_list(matrix):
     adjlist = []
@@ -142,7 +142,7 @@ def task1():
             print("All edges:")
             print(edges)
 
-            drawCircularGraph(G)
+            draw_circular_graph(G)
 
         case 'al':
             # adjacency list
@@ -174,7 +174,7 @@ def task1():
             print("All edges:")
             print(edges)
 
-            drawCircularGraph(G)
+            draw_circular_graph(G)
             
         case 'im':
             # incidence matrix
@@ -197,7 +197,7 @@ def task1():
             print("All edges:")
             print(edges)
 
-            drawCircularGraph(G)
+            draw_circular_graph(G)
             
         case _:
             print("Please specify input type")

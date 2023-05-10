@@ -10,7 +10,7 @@ def is_connected(adj_matrix):
     n = len(adj_matrix)
     visited = [False] * n
     
-    # Funkcja pomocnicza DFS
+    # Funkcja pomocnicza Przeszukiwanie w głąb
     def dfs(v):
         visited[v] = True
         for i in range(n):
@@ -18,9 +18,12 @@ def is_connected(adj_matrix):
                 dfs(i)
     
     # Znajdowanie pierwszego nieodwiedzonego wierzchołka i przeszukiwanie grafu DFS
+    dfs(0)
+    
+    # Jeżeli po przeszukiwaniu wgłą któryś wierzchołek jest nieodwiedzony, to graf ten nie jest spójny
     for i in range(n):
         if not visited[i]:
-            dfs(i)
+            return False
     
     # Zwraca True jeżeli graf jest spójny, w przeciwnym wypadku False
     return all(visited)
@@ -50,10 +53,14 @@ def draw_weighted_graph(G):
     plt.show()
     
     # Testowanie
-    plt.savefig('test.png')
+    # plt.savefig('graph.png')
         
 if __name__ == '__main__':
     # Wygenerowany graf
     G = nx.Graph()
-    G = generate_connected_graph(10)
+<<<<<<< Updated upstream
+    G = generate_connected_graph(5)
+=======
+    G = generate_connected_graph(9)
+>>>>>>> Stashed changes
     draw_weighted_graph(G)
