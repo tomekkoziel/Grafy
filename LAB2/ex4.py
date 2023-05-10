@@ -3,11 +3,15 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import networkx as nx
 import random
-from operator import itemgetter
 
+<<<<<<< Updated upstream
 from LAB1.ex1 import draw_circular_graph
 from LAB1.ex3 import make_rand_graph_edges
 from utility import read_from_file, is_bridge, find_neighbors
+=======
+from LAB1.ex1 import drawCircularGraph
+from utility import is_bridge, find_neighbors
+>>>>>>> Stashed changes
 from ex123 import get_nodes_from_graphical, get_edges_from_graphical, check_if_graphical
 
 def is_euler(G):
@@ -37,8 +41,7 @@ def create_random_euler_graph(v_count):
 
 def fleury(G):
     if not is_euler(G):
-        print("This is not an eulerian graph")
-        return
+        sys.exit("This is not an eulerian graph")
     
     Gc = G.copy()
     
@@ -69,12 +72,11 @@ def task4():
     # G = read_from_file("data4.txt")
     # print("True" if is_euler(G) else "False")
 
-    # print(list(nx.eulerian_circuit(G)))
     # print(fleury(G))
 
     # draw_circular_graph(G)
     G = create_random_euler_graph(9)
-
+    # print(list(nx.eulerian_circuit(G)))
     # print(list(nx.eulerian_circuit(G)))
     print(fleury(G))
     draw_circular_graph(G)
@@ -84,23 +86,6 @@ def create_sequence_graph(size):
     sequence = [random.randrange(2, size, 2) for _ in range(size)]
     # print('graph sequence: ', sequence)
     return sequence
-
-def set_euler_path(matrix):
-        # https://cp-algorithms.com/graph/euler_path.html#algorithm
-        stack = [0]
-        answer = []
-        while len(stack) != 0:
-            v = stack[-1]
-            if 1 not in matrix[v]:
-                answer.append(v)
-                stack.pop()
-            else:
-                edge = matrix[v].index(1)
-                matrix[v][edge] = 0
-                matrix[edge][v] = 0
-                stack.append(edge)
-        print([[i+1] for i in answer])
-
 
 if __name__ == '__main__':
     # G1 = nx.Graph()
