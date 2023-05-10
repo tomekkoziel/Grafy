@@ -39,7 +39,6 @@ def bubble_sort(edges, weights):
                 if(weights[j] > weights[j+1]):
                     weights[j], weights[j+1] = weights[j+1], weights[j]
                     edges[j], edges[j+1] = edges[j+1], edges[j]
-    return edges, weights
 
 def find_smallest_tree(n):
     while True:
@@ -75,6 +74,8 @@ def find_smallest_tree(n):
     for edge in tree_edges:
         G.add_edge(edge[0],edge[1], weight = tree_weights[counter])
         counter += 1
-    draw_weighted_graph(G)
+    return G
 
-find_smallest_tree(19)
+if __name__ == "__main__":
+    G = find_smallest_tree(19)
+    draw_weighted_graph(G)
