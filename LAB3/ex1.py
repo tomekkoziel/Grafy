@@ -58,5 +58,5 @@ def draw_weighted_graph(G):
 if __name__ == '__main__':
     # Wygenerowany graf
     G = nx.Graph()
-    G = generate_connected_graph(5)
+    G = generate_connected_graph(9)
     draw_weighted_graph(G)
