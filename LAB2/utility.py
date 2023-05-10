@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-from LAB1.ex1 import adj_list_to_adj_matrix, get_nodes_from_adjmatrix, get_edges_from_adjmatrix, drawCircularGraph
+from LAB1.ex1 import adj_list_to_adj_matrix, get_nodes_from_adjmatrix, get_edges_from_adjmatrix, draw_circular_graph
 from ex123 import components
 
 def read_from_file(path):
@@ -26,7 +26,7 @@ def read_from_file(path):
     # Testowanie
     # print("All edges:")
     # print(edges)
-    # drawCircularGraph(G)
+    # draw_circular_graph(G)
     
     return G
 

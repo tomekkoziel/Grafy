@@ -6,7 +6,7 @@ import random
 from operator import itemgetter
 import numpy as np
 
-from LAB1.ex2 import drawCircularGraph
+from LAB1.ex2 import draw_circular_graph
 from LAB1.ex3 import get_edges_from_adjmatrix, get_nodes_from_adjmatrix
 from ex123 import randomize_graph
 
@@ -75,7 +75,7 @@ def generate_k_regular_graph(nodes, k):
     
     if any((G.degree(node) % 2) == 1 for node in G.nodes):
 
-    drawCircularGraph(G)
+    draw_circular_graph(G)
 
 
 

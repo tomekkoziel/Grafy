@@ -5,7 +5,7 @@ import networkx as nx
 import random
 from operator import itemgetter
 
-from LAB1.ex1 import drawCircularGraph
+from LAB1.ex1 import draw_circular_graph
 from LAB1.ex3 import make_rand_graph_edges
 from utility import read_from_file, is_bridge, find_neighbors
 from ex123 import get_nodes_from_graphical, get_edges_from_graphical, check_if_graphical
@@ -72,12 +72,12 @@ def task4():
     # print(list(nx.eulerian_circuit(G)))
     # print(fleury(G))
 
-    # drawCircularGraph(G)
+    # draw_circular_graph(G)
     G = create_random_euler_graph(9)
 
     # print(list(nx.eulerian_circuit(G)))
     print(fleury(G))
-    drawCircularGraph(G)
+    draw_circular_graph(G)
 
 
 def create_sequence_graph(size):
