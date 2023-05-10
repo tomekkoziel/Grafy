@@ -4,14 +4,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import networkx as nx
 import random
 
-<<<<<<< Updated upstream
 from LAB1.ex1 import draw_circular_graph
-from LAB1.ex3 import make_rand_graph_edges
-from utility import read_from_file, is_bridge, find_neighbors
-=======
-from LAB1.ex1 import drawCircularGraph
 from utility import is_bridge, find_neighbors
->>>>>>> Stashed changes
 from ex123 import get_nodes_from_graphical, get_edges_from_graphical, check_if_graphical
 
 def is_euler(G):
@@ -25,8 +19,13 @@ def create_random_euler_graph(v_count):
     flag = True
 
     while(flag == True):
+        # Losowanie sekwencji funkcją
         sequence = create_sequence_graph(v_count)
+
+        # Sprawdzenie czy sekwencja jest graficzna
         if check_if_graphical(sequence):
+
+            # Kreacja grafu
             nodes = get_nodes_from_graphical(sequence)
             edges = get_edges_from_graphical(sequence, nodes)
 
@@ -34,32 +33,40 @@ def create_random_euler_graph(v_count):
             G.add_nodes_from(nodes)
             G.add_edges_from(edges)
         
+            # Sprawdzenie czy graf jest eulerowski i ewentualne zwrócenie grafu
             if is_euler(G):
                 flag = False
                 return G
 
 
 def fleury(G):
+    # Sprawdzenie czy graf jest eulerowski
     if not is_euler(G):
         sys.exit("This is not an eulerian graph")
     
+    # Kopia grafu, żeby nie psuć oryginalnego
     Gc = G.copy()
     
+    # Ustalenie stosu do zapisywania cyklu eulera oraz początkowego wierzchołka
     euler_cycle = []
     current_node = 1
 
     while len(Gc.edges) > 0:
-
+        # Ustalenie następnego wierzchołka na podstawie sąsiadów aktualnego wierzchołka
         next_node = None
         for neighbor in find_neighbors(Gc, current_node):
+            # Sprawdzenie czy dany sąsiad tworzy z aktualnym wierzchołkiem most
             if not is_bridge(Gc, current_node, neighbor):
                 next_node = neighbor
                 break
 
+        # Jeśli zostały tylko mosty, wybieramy dowolny dostępny z sąsiadów
         if next_node is None:
             next_node = next(iter(find_neighbors(Gc, current_node)))
 
+        # Usunięcie krawędzi z grafu, dla łatwiejszego szukania cyklu
         Gc.remove_edge(current_node, next_node)
+        # Dodanie krawędzi do cyklu
         euler_cycle.append((current_node, next_node))
 
         # Update the current node
@@ -67,33 +74,25 @@ def fleury(G):
     
     return euler_cycle
 
-
-def task4():
-    # G = read_from_file("data4.txt")
-    # print("True" if is_euler(G) else "False")
-
-    # print(fleury(G))
-
-    # draw_circular_graph(G)
-    G = create_random_euler_graph(9)
-    # print(list(nx.eulerian_circuit(G)))
-    # print(list(nx.eulerian_circuit(G)))
-    print(fleury(G))
-    draw_circular_graph(G)
-
-
+# Losowanie sekwencji dla grafu
 def create_sequence_graph(size):
     sequence = [random.randrange(2, size, 2) for _ in range(size)]
     # print('graph sequence: ', sequence)
     return sequence
 
-if __name__ == '__main__':
-    # G1 = nx.Graph()
-    # G1.add_nodes_from([1, 2, 3, 4])
-    # G1.add_edges_from([(1, 2), (2, 3), (2, 4), (3, 4)])
-    # is_hamilton(G1)
 
-    # G2 = nx.Graph()
-    # G2.add_nodes_from([1, 2, 3, 4, 5, 6, 7, 8])
-    # print(G2.nodes)
+def task4():
+    # G = read_from_file("data4.txt")
+    # print("True" if is_euler(G) else "False")
+    
+    G = create_random_euler_graph(9)
+    # print(list(nx.eulerian_circuit(G)))
+    print(fleury(G))
+
+    draw_circular_graph(G)
+
+
+
+
+if __name__ == '__main__':
     task4()

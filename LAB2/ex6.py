@@ -2,8 +2,6 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import networkx as nx
-import matplotlib.pyplot as plt
-import numpy as np
 from LAB1.ex1 import  draw_circular_graph
 from utility import read_from_file
 

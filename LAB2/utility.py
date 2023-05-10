@@ -30,7 +30,10 @@ def read_from_file(path):
     
     return G
 
+# Sprawdzanie czy dana krawędź w grafie jest mostem
 def is_bridge(G, u, v):
+
+    # Kopia grafu i usunięcie z niej zadanej krawędzi
     Gcopy = G.copy()
     Gcopy.remove_edge(u, v)
 
@@ -39,21 +42,11 @@ def is_bridge(G, u, v):
     
     return True
 
+# Znajdowanie wszystkich sąsiadów danego wierzchołka
 def find_neighbors(G, node):
     neighbors = []
 
     for edge in G.edges:
-        if(node == edge[0]):
-            neighbors.append(edge[1])
-        elif(node == edge[1]):
-            neighbors.append(edge[0])
-
-    return neighbors
-
-def find_neighbors_edges(edges, node):
-    neighbors = []
-
-    for edge in edges:
         if(node == edge[0]):
             neighbors.append(edge[1])
         elif(node == edge[1]):
