@@ -16,12 +16,13 @@ def get_center_minmax(n):
         len_max[i] = np.max(len_matrix[i])
     # print(len_matrix)
     # Znalezienie minimum z sum oraz maximów wierzchołków
-    min_sum_center = np.min(len_sum)
-    min_max_center = np.min(len_max)
-    return min_max_center, min_sum_center, G
+    min_sum_center = np.where(len_sum == np.min(len_sum))[0] +1
+    min_max_center = np.where(len_max == np.min(len_max))[0] +1
+    return min_max_center, min_sum_center, G, len_matrix
 
 if __name__ == '__main__':
-    min_max_center, min_sum_center, G = get_center_minmax(5)
+    min_max_center, min_sum_center, G, len_matrix = get_center_minmax(5)
+    print(len_matrix)
     print(min_max_center)
     print(min_sum_center)
     draw_weighted_graph(G)
