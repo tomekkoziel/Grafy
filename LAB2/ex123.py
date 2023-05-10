@@ -20,7 +20,7 @@ def check_if_graphical(matrix):
             if(num < 0):
                 return False
         # Redukowanie kolejnych n elementów, n = pierwszy wyraz ciągu
-        for i in range(1,matrix[0]+1):
+        for i in range(1, matrix[0] + 1):
             matrix[i] -= 1
         matrix[0] = 0
 
@@ -48,12 +48,12 @@ def get_edges_from_graphical(matrix, nodes):
             break
         # Sortowanie ciągu z zachowaniem kolejności wierzchołków
         for i in range(len(matrix)):
-            for j in range(0,len(matrix)-i-1):
+            for j in range(0, len(matrix) - i-1):
                 if(matrix[j] < matrix[j+1]):
                     matrix[j], matrix[j+1] = matrix[j+1], matrix[j]
                     nodes[j], nodes[j+1] = nodes[j+1], nodes[j]
          # Redukowanie kolejnych n elementów, n = pierwszy wyraz ciągu
-        for i in range(1,matrix[0]+1):
+        for i in range(1, matrix[0]+1):
             matrix[i] -= 1
             edges.append((nodes[0],nodes[i]))
         matrix[0] = 0
@@ -79,11 +79,11 @@ def randomize_graph(edges, n):
         is_edge_in_graph = False
         is_loop = False
         # Losowanie indexów krawędzi do zmiany
-        idx = np.random.choice(len(edges),size=2, replace=False) 
+        idx = np.random.choice(len(edges), size=2, replace=False) 
         # Przypisanie krawędzi oraz zamiana ich wierzchołków
         edge1 = edges[idx[0]]
         edge2 = edges[idx[1]]
-        edge1,edge2 = (edge1[0],edge2[1]),(edge1[1],edge2[0])  
+        edge1, edge2 = (edge1[0], edge2[1]), (edge1[1], edge2[0])  
         # Sprawdzanie czy nowe krawędzie nie istnieją już w grafie oraz czy nie ma pętli
         for edge in edges:
             if(edge1[0] == edge1[1] or edge2[0] == edge2[1]):

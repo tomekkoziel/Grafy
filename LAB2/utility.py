@@ -49,3 +49,14 @@ def find_neighbors(G, node):
             neighbors.append(edge[0])
 
     return neighbors
+
+def find_neighbors_edges(edges, node):
+    neighbors = []
+
+    for edge in edges:
+        if(node == edge[0]):
+            neighbors.append(edge[1])
+        elif(node == edge[1]):
+            neighbors.append(edge[0])
+
+    return neighbors

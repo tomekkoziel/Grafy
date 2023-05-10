@@ -2,8 +2,6 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import networkx as nx
-import matplotlib.pyplot as plt
-import random
 import numpy as np
 from LAB3.ex1 import generate_connected_graph, draw_weighted_graph
 from LAB3.ex2 import dijkstra
