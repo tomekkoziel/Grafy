@@ -92,7 +92,5 @@ def task4():
     draw_circular_graph(G)
 
 
-
-
 if __name__ == '__main__':
     task4()

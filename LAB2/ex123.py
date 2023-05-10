@@ -118,7 +118,7 @@ def components(nodes, edges):
             comp[node - 1] = nr
             components_R(nr, node, comp, edges)
     
-    print(comp)
+    # print(comp)
     return comp
 
 def components_R(nr, node, comp, edges):
