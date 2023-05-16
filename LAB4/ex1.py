@@ -17,7 +17,7 @@ def make_rand_digraph_adjmatrix(n, p):
                 adjmatrix[i][j] = random.choices([0, 1],weights=[1-p, p], k=1)[0]    
     return adjmatrix
 
-def draw_digraph_from_adjmatrix(adjmatrix):
+def draw_digraph_from_adjmatrix(adjmatrix, colors = '#ffa059'):
     G = nx.DiGraph()
 
     # Dodawanie wierzchołków do grafu
@@ -32,13 +32,13 @@ def draw_digraph_from_adjmatrix(adjmatrix):
 
     # Rysowanie grafu
     pos = nx.circular_layout(G)
-    nx.draw(G, pos, with_labels=True, arrows=True)
+    nx.draw(G, pos, with_labels=True, arrows=True, node_color = colors)
 
     # Wyświetlanie grafu
     plt.show()
 
 if __name__ == '__main__':
-    adjmatrix = make_rand_digraph_adjmatrix(8, 0.2)
+    adjmatrix = make_rand_digraph_adjmatrix(8, 0.1)
     print(adjmatrix)
     draw_digraph_from_adjmatrix(adjmatrix)
     
