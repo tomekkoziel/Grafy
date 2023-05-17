@@ -17,7 +17,7 @@ def make_rand_digraph_adjmatrix(n, p):
                 adjmatrix[i][j] = random.choices([0, 1],weights=[1-p, p], k=1)[0]    
     return adjmatrix
 
-def draw_digraph_from_adjmatrix(adjmatrix, colors = '#ffa059'):
+def draw_digraph_from_adjmatrix(adjmatrix, colors = '#ffa059', weights = []):
     G = nx.DiGraph()
 
     # Dodawanie wierzchołków do grafu
@@ -27,15 +27,25 @@ def draw_digraph_from_adjmatrix(adjmatrix, colors = '#ffa059'):
     # Dodawanie krawędzi do grafu na podstawie macierzy sąsiedztwa
     for i in range(nodes):
         for j in range(nodes):
-            if adjmatrix[i][j] == 1:
+            # Jeśli graf bez wag to nie dodajemy wag
+            if adjmatrix[i][j] == 1 and len(weights) == 0:
                 G.add_edge(i + 1, j + 1)
-
+            # Jeśli graf z wagami to dodajemy wagi
+            elif adjmatrix[i][j] == 1 and len(weights) > 0:
+                G.add_edge(i+1, j+1, weight = weights[i][j])
+   
     # Rysowanie grafu
     pos = nx.circular_layout(G)
     nx.draw(G, pos, with_labels=True, arrows=True, node_color = colors)
-
+    # Jeśli graf z wagami to dodajemy wagi
+    if len(weights) != 0:
+        edge_labels = nx.get_edge_attributes(G, 'weight')
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
     # Wyświetlanie grafu
+    # print(nx.is_strongly_connected(G))
     plt.show()
+    return G
+    
 
 if __name__ == '__main__':
     adjmatrix = make_rand_digraph_adjmatrix(8, 0.1)

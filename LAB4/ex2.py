@@ -43,16 +43,15 @@ def dfs_visit(node, adjmatrix, d, f, t):
     d[node] = t[0]
     # stack.append(node)
     # print(adjmatrix[node])
-    for v in range(len(adjmatrix[node])):
+    for v in range(len(adjmatrix)):
         if adjmatrix[node][v] == 1 and d[v] == -1:
             dfs_visit(v,adjmatrix,d,f,t)
-            break
     t[0] += 1
     f[node] = t[0]
 
 
 def components_r(nr,node,adjmatrix,comp):
-    for v in range(len(adjmatrix[node])):
+    for v in range(len(adjmatrix)):
         if adjmatrix[node][v] == 1 and comp[v] == -1:
             comp[v] = nr
             components_r(nr,v,adjmatrix,comp)
@@ -80,4 +79,4 @@ if __name__ == "__main__":
     # print(adjmatrix)
     comp = kosajaru(adjmatrix)
     print(comp)
-    draw_digraph_from_adjmatrix(adjmatrix, colors=comp)
+    draw_digraph_from_adjmatrix(adjmatrix,colors=comp)
