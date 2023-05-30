@@ -12,9 +12,9 @@ from LAB3.ex2 import init, relax
 def strong_cohernet_digraph(n, p):
     adjmatrix = []
     counter = 0
+    # Sprawdzenie czy graf jest silnie spójny
     while True:
         adjmatrix = make_rand_digraph_adjmatrix(n, p)
-        # print(kosajaru(adjmatrix))
         if all(el == 1 for el in kosajaru(adjmatrix)):
             break
         counter += 1
@@ -24,22 +24,23 @@ def strong_cohernet_digraph(n, p):
 
 def add_weights_to_adjmatrix(max, min, adjmatrix):
     weight_adjmatrix = np.copy(adjmatrix)
-    # print(weight_adjmatrix)
+    # Dodanie wag do grafu skierowanego
     for i in range(len(adjmatrix)):
         for j in range(len(adjmatrix)):
             if(weight_adjmatrix[i][j] == 1):
                 weight_adjmatrix[i][j] = random.randint(min,max)
-    # print(weight_adjmatrix)
     return weight_adjmatrix
 
 def belman_ford(adjmatrix, weight_adjmatrix, s):
+    # Alokacja pamięci
     ds, ps = init(adjmatrix,s)
+    # Relaksacja 
     for i in range(1,len(adjmatrix)):
         for u in range(len(adjmatrix)):
             for v in range(len(adjmatrix)):
                 if adjmatrix[u][v] == 1:
                     relax(u,v,weight_adjmatrix, ds, ps)
-    # print(ds)
+    # Znajdowanie najktotszych sciezek
     for i in range(1,len(adjmatrix)):
         for u in range(len(adjmatrix)):
             for v in range(len(adjmatrix)):
