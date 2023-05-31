@@ -73,7 +73,7 @@ def create_digraph_from_adjlist(adjacency_list):
     
     return G
 
-def good_pagerank(G):
+def pagerank_randomwalk(G):
     num_nodes = G.number_of_nodes()
     ranks = {node: 1 / num_nodes for node in G.nodes()}
 
@@ -83,8 +83,7 @@ def good_pagerank(G):
     for _ in range(num_iterations):
         new_ranks = {}
         for node in G.nodes():
-            rank_sum = sum(ranks[neighbor] / G.out_degree(neighbor) 
-                           for neighbor in G.predecessors(node))
+            rank_sum = sum(ranks[neighbor] / G.out_degree(neighbor) for neighbor in G.predecessors(node))
             new_ranks[node] = (1 - d) * rank_sum + d / num_nodes
         ranks = new_ranks
 
@@ -112,7 +111,7 @@ def pagerank_matrix(G, d=0.15, epsilon=1e-8, max_iterations=100):
 
 if __name__ == '__main__':
 
-    # Example adjacency list
+    # Przykładowa lista sąsiedztwa
     adj_list = {
         'A': ['B', 'C'],
         'B': ['C'],
@@ -120,37 +119,31 @@ if __name__ == '__main__':
         'D': ['D']  
     }
 
-    # Example file path
+    # Wczytanie ścieżki do pliku
     file_path = 'data/adjlist.txt'
 
-    # Creating the digraph from file
+    # Tworzenie digrafu na podstawie ścieżki/listy sąsiedztwa
     G = create_digraph_from_file(file_path)
     G1 = create_digraph_from_adjlist(adj_list)
 
-    # Printing the nodes and edges of the digraph
-    print("Nodes:", G.nodes())
-    print("Edges:", G.edges())
-
+    # Narysowanie grafu
     pos = nx.spring_layout(G)
     nx.draw(G, pos, node_color = "#ff6d01", node_size = 500)
     nx.draw_networkx_labels(G, pos)
-    # nx.draw_networkx_edges(G, pos, arrows=False)
     plt.show()
 
-    ranks_method1 = good_pagerank(G)
-
+    ranks_method1 = pagerank_randomwalk(G)
     sorted_nodes = sorted(ranks_method1, key=ranks_method1.get, reverse=True)
 
-    # Wydrukowanie wierzchołków w porządku malejącym
+    # Wyniki metody korzystającej z błądzenia losowego
     print("Metoda 1 - Wierzchołki w porządku malejącym:")
     for node in sorted_nodes:
         print(f"Node: {node}, Rank: {ranks_method1[node]}")
 
     ranks_method2 = pagerank_matrix(G)
-
     sorted_nodes = sorted(ranks_method2, key=ranks_method2.get, reverse=True)
 
-    # Wydrukowanie wierzchołków w porządku malejącym
+    # Wyniki metody korzystającej z macierzy
     print("Metoda 2 - Wierzchołki w porządku malejącym:")
     for node in sorted_nodes:
         print(f"Node: {node}, Rank: {ranks_method2[node]}")
