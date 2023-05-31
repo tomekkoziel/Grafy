@@ -48,6 +48,7 @@ def hamilton_cycle_recursive(G, node, cycle):
     cycle.pop()
     return False
 
+# Funkjca tworząca digraf z pliku
 def create_digraph_from_file(file_path):
     G = nx.DiGraph()
 
@@ -63,6 +64,7 @@ def create_digraph_from_file(file_path):
 
     return G
 
+# Funkjca tworząca digraf z listy sąsiedztwa
 def create_digraph_from_adjlist(adjacency_list):
     G = nx.DiGraph()
     
@@ -73,6 +75,7 @@ def create_digraph_from_adjlist(adjacency_list):
     
     return G
 
+# Algorytm paggerank wykorzystujacy błądzenie losowe
 def pagerank_randomwalk(G):
     num_nodes = G.number_of_nodes()
     ranks = {node: 1 / num_nodes for node in G.nodes()}
@@ -89,6 +92,7 @@ def pagerank_randomwalk(G):
 
     return ranks
 
+# Algorytm paggerank wykorzystujacy macierz
 def pagerank_matrix(G, d=0.15, epsilon=1e-8, max_iterations=100):
     n = G.number_of_nodes()  # liczba wierzchołków
     p = {node: 1 / n for node in G.nodes()}  # inicjalizacja wektora obsadzeń p0
